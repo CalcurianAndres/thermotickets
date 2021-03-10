@@ -1,0 +1,154 @@
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-content">
+            <h2 class="title is-3">Monitor de direcciones</h2>
+            <h3 class="is-4">Nueva direccion:</h3>
+
+            <!-- CAMPOS PARA NUEVA DIRECCCIÓN -->
+            <form
+            autocomplete="off"
+            [formGroup]="Ips"
+            (ngSubmit)="NuevaDireccion()">
+                <div class="field">
+                    <label class="label">Nombre Monitor</label>
+                    <div class="control">
+                        <input class="input" 
+                        type="text" 
+                        placeholder="Nombre de dirección" 
+                        formControlName='nombre'
+                        [ngClass]="{'is-danger': campoNoValido('nombre')}">
+                    </div>
+                </div>
+                <p class="help is-danger" *ngIf="campoNoValido('nombre')">
+                    Este campo es requerido
+                </p>
+                <div class="field">
+                    <label class="label">Dirección IP</label>
+                    <div class="control">
+                        <input class="input" 
+                        type="text" 
+                        placeholder="192.168.x.x" 
+                        formControlName='direccion'
+                        [ngClass]="{'is-danger': campoNoValido('direccion')}">
+                    </div>
+                </div>
+                <p class="help is-danger" *ngIf="campoNoValido('direccion')">
+                    Este campo es requerido
+                </p>
+                <div class="field is-grouped">
+                    <div class="control">
+                        <button class="button is-link">Crear</button>
+                    </div>
+                </div>
+            </form>
+            <!-- FINAL DE NUEVA DIRECCIÓN -->
+            <div class="columns mt-5 has-text-centered">
+                <div class="column">
+                    <div class="card">
+                        <header class="card-header">
+                            <p class="card-header-title">Monitor</p>
+                            <button class="card-header-icon" aria-label="cerrar">
+                                <span class="icon">
+                                    <i class="far fa-trash-alt"></i>
+                                </span>
+                            </button>
+                        </header>
+                        <div class="card-content">
+                        <span class="icon-text has-text-success">
+                        <span class="icon">
+                            <i class="far fa-2x fa-check-circle"></i><br>
+                        </span>
+                        </span> <br> <br>
+                            <b class='mt-5'>Nombre de Dirección</b>
+                        <br>192.168.0.0 <br>
+                    <button class="button is-primary mt-5 is-fullwidth">Monitorear</button></div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="card">
+                        <header class="card-header">
+                            <p class="card-header-title">Monitor</p>
+                            <button class="card-header-icon" aria-label="cerrar">
+                                <span class="icon">
+                                    <i class="far fa-trash-alt"></i>
+                                </span>
+                            </button>
+                        </header>
+                        <div class="card-content">
+                        <span class="icon-text has-text-success">
+                        <span class="icon">
+                            <i class="far fa-2x fa-check-circle"></i><br>
+                        </span>
+                        </span> <br> <br>
+                            <b class='mt-5'>Nombre de Dirección</b>
+                        <br>192.168.0.0 <br>
+                    <button class="button is-primary mt-5 is-fullwidth">Monitorear</button></div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="card">
+                        <header class="card-header">
+                            <p class="card-header-title">Monitor</p>
+                            <button class="card-header-icon" aria-label="cerrar">
+                                <span class="icon">
+                                    <i class="far fa-trash-alt"></i>
+                                </span>
+                            </button>
+                        </header>
+                        <div class="card-content">
+                        <span class="icon-text has-text-danger">
+                            <span class="icon">
+                              <i class="fas fa-2x fa-ban"></i>
+                            </span>
+                          </span> <br> <br>
+                            <b class='mt-5'>Nombre de Dirección</b>
+                        <br>192.168.0.0 <br>
+                    <button class="button is-primary mt-5 is-fullwidth">Monitorear</button></div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="card">
+                        <header class="card-header">
+                            <p class="card-header-title">Monitor</p>
+                            <button class="card-header-icon" aria-label="cerrar">
+                                <span class="icon">
+                                    <i class="far fa-trash-alt"></i>
+                                </span>
+                            </button>
+                        </header>
+                        <div class="card-content">
+                        <span class="icon-text has-text-success">
+                        <span class="icon">
+                            <i class="far fa-2x fa-check-circle"></i><br>
+                        </span>
+                        </span> <br> <br>
+                            <b class='mt-5'>Nombre de Dirección</b>
+                        <br>192.168.0.0 <br>
+                    <button class="button is-primary mt-5 is-fullwidth">Monitorear</button></div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="card">
+                        <header class="card-header">
+                            <p class="card-header-title">Monitor</p>
+                            <button class="card-header-icon" aria-label="cerrar">
+                                <span class="icon">
+                                    <i class="far fa-trash-alt"></i>
+                                </span>
+                            </button>
+                        </header>
+                        <div class="card-content">
+                        <span class="icon-text has-text-success">
+                        <span class="icon">
+                            <i class="far fa-2x fa-check-circle"></i><br>
+                        </span>
+                        </span> <br> <br>
+                            <b class='mt-5'>Nombre de Dirección</b>
+                        <br>192.168.0.0 <br>
+                    <button class="button is-primary mt-5 is-fullwidth">Monitorear</button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

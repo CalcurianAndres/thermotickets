@@ -1,0 +1,67 @@
+<div class="card">
+    <div class="card-content">
+        <h1 class="is-2 title">Configuración</h1>
+        <div class="columns">
+            <div class="column">
+                <figure class="image is-square">
+                    <img src="../../../../assets/PassChange.jpg">
+                </figure>
+            </div>
+            <div class="column">
+                <div class="card">
+                    <div class="card-header">
+                        <p class="card-header-title">Cambiar contraseña</p>
+                    </div>
+                    <div class="card-content">
+                    <form (ngSubmit)='cambiarPass()' [formGroup]="cambiarPassForm">
+                            <div class="field">
+                                <label class="label">Contraseña actual</label>
+                                <div class="control has-icons-left has-icons-right">
+                                    <input class="input" 
+                                            type="password" 
+                                            placeholder="Contraseña actual"
+                                            formControlName='oldPass'
+                                            [ngClass]="{'is-danger': campoNoValido('oldPass')}">
+                                    <span class="icon is-small is-left">
+                                <i class="fas fa-lock"></i>
+                              </span>
+                            </div>
+                            <p class="help is-danger" *ngIf="campoNoValido('oldPass')">Debe ingresar contraseña actual</p>
+                          </div>
+                          <hr>
+                          <div class="field">
+                            <label class="label">Nueva contraseña</label>
+                            <div class="control has-icons-left has-icons-right">
+                              <input class="input" 
+                                        type="password" 
+                                        placeholder="Nueva contraseña"
+                                        formControlName="newPass"
+                                        [ngClass]="{'is-danger': campoNoValido('newPass')}">
+                              <span class="icon is-small is-left">
+                                <i class="fas fa-lock"></i>
+                              </span>
+                            </div>
+                            <p class="help is-danger" *ngIf="campoNoValido('newPass')">Debe ingresar nueva contraseña</p>
+                          </div>
+                          <div class="field">
+                              <label class="label">Repetir nueva contraseña</label>
+                              <div class="control has-icons-left has-icons-right">
+                                  <input class="input" 
+                                            type="password" 
+                                            placeholder="Ingresa de nuevo tu contraseña"
+                                            formControlName="dosPass"
+                                            [ngClass]="{'is-danger': campoNoValido('dosPass')}">
+                              <span class="icon is-small is-left">
+                                  <i class="fas fa-lock"></i>
+                              </span>
+                            </div>
+                            <p class="help is-danger" *ngIf="campoNoValido('dosPass') || noCoinciden">Las contraseñas no coinciden</p>
+                        </div>
+                        <button class="button is-primary is-fullwidth">Cambiar contraseña</button>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

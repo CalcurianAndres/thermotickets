@@ -1,0 +1,38 @@
+.etiqueta{
+    display: block;
+    width: 100%;
+    height: 180px;
+    color: white;
+    text-align: center;
+}
+.morado2{
+    font-size: 60px;
+    font-family: 'Advent Pro', sans-serif;
+    background-color: #ab4dbb;
+}
+
+.azul{
+    font-size: 30px;
+    font-family: 'Advent Pro', sans-serif;
+    background-color: rgb(158, 203,108);
+}
+.morado{
+    font-size: 30px;
+    font-family: 'Advent Pro', sans-serif;
+    background-color: rgb(45, 167, 154);
+}
+.negro{
+    font-size: 30px;
+    font-family: 'Advent Pro', sans-serif;
+    background-color: rgb(123, 145, 156);
+}
+
+
+
+a{
+    color: white;
+}
+li{
+    color: white;
+    font-size: 20px;
+}

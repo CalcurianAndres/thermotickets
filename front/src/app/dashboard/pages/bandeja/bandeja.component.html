@@ -1,0 +1,104 @@
+<div class="card">
+    <div class="card-content">
+        <h2 class="title is-3">Bandeja</h2>
+        <div class="columns has-text-centered">
+            <div class="column">
+                <div class="etiqueta box morado">
+                    <div class="columns">
+                        <div class="column">Total</div>
+                        <div class="column"><b>{{total}}</b></div>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="etiqueta box verdeC">
+                    <div class="columns">
+                        <div class="column">Ejecutandose</div>
+                        <div class="column"><b>{{ejecutandose}}</b></div>
+                    </div>
+            </div></div>
+            <div class="column">
+                <div class="etiqueta box verdeO">
+                    <div class="columns">
+                        <div class="column">Abiertos</div>
+                        <div class="column"><b>{{abierto}}</b></div>
+                    </div>
+            </div></div>
+            <div class="column">
+                <div class="etiqueta box negro">
+                    <div class="columns">
+                        <div class="column">Cerrados</div>
+                        <div class="column"><b>{{cerrado}}</b></div>
+                    </div>
+            </div></div>
+        </div>
+        <!-- Cargando -->
+        <div class="level" *ngIf="cargando">
+            <div class="level-item has-text-centered">
+                <div>
+                    <p class="heading">Cargando.</p>
+                    <p class="title"><i class="fas fa-circle-notch fa-pulse"></i></p>
+                    <p class="tittle">Por favor espere...</p>
+                </div>
+            </div>
+        </div>
+        <!-- Bandeja vacia -->
+        <div class="no-ticket" *ngIf="!cargando && tickets.length == 0">
+            <div class="columns">
+                <div class="column is-one-third">
+                    <p class="empty">Bandeja Vacia</p>
+                    <h2 class="subtitulo">Tomate un descanso</h2>
+                </div>
+                <div class="column">
+                    <img src="../../../../assets/Empty.jpg" width="500px">
+                </div>
+            </div>
+        </div>
+        <!-- Bandeja -->
+        <div class="table-container animate__animated animate__fadeIn" *ngIf="!cargando && tickets.length > 0">
+            <table class="table" width='100%'>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Abierto por:</th>
+                        <th>AnyDesk</th>
+                        <th>Asunto</th>
+                        <th>Status</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let ticket of tickets; let i = index">
+                        <td>{{i+1}}</td>
+                        <td>
+                            <div class="columns">
+                                <div class="column is-2">
+                                    <figure class="image is-32x32">
+                                        <img class="is-rounded" [src]='ticket.perfilDueno()'>
+                                    </figure>
+                                </div>
+                                <div class="column">
+                                    {{ticket.usuario[0].Nombre}} {{ticket.usuario[0].Apellido}}
+                                </div>
+                            </div>
+                        </td> 
+                        <td>{{ticket.usuario[0].AnyDesk}}</td>
+                        <td>
+                            <a routerLink="/dashboard/ticket/{{ticket._id}}">{{ticket.titulo}}</a>
+                        </td>
+                        <td>
+                            <span class="tag is-success is-light" *ngIf="ticket.estado == 'ABIERTO'">{{ticket.estado}}</span>
+                            <span class="tag is-warning is-light" *ngIf="ticket.estado == 'EJECUTANDOSE'">{{ticket.estado}}</span>
+                        </td>
+                            <!-- <span class="tag is-success is-light">{{ticket.estado}}</span></td> -->
+                        <td>{{ticket.fecha | date:'dd/MM/yyyy'}}</td> 
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <nav class="pagination is-small" role="navigation" aria-label="pagination" *ngIf="!cargando && tickets.length > 0">
+            <a class="pagination-previous" (click)="previous()">Anterior</a>
+            <a class="pagination-next" (click)="next()">Siguiente</a>
+        </nav>
+    </div>
+</div>

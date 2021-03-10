@@ -1,0 +1,105 @@
+<div class="card">
+    <div class="card-content">
+        <form
+        autocomplete="off"
+        [formGroup]="nuevoTicket"
+        (ngSubmit)="NuevoTicket()">
+        <h2 class="title is-3">Nuevo ticket</h2>
+        <fieldset disabled="disabled">
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label">De</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <p class="control is-expanded has-icons-left">
+                            <input type="text" class="input" placeholder="{{usuario.Nombre}} {{usuario.Apellido}}">
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-user"></i>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="field">
+                        <p class="control is-expanded has-icons-left">
+                            <input type="text" class="input" placeholder="{{usuario.Correo}}">
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-user"></i>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </fieldset><br>
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+              <label class="label">Departmento</label>
+            </div>
+            <div class="field-body">
+              <div class="field is-narrow">
+                <div class="control">
+                  <div class="select is-fullwidth">
+                    <select formControlName='Departamento'>
+                      <option value="soporte">Soporte</option>
+                      <option value="profit">Profit</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label">Asunto</label>
+                </div>
+            <div class="field-body">
+                <div class="field">
+                    <div class="control">
+                <input class="input is-danger" 
+                        type="text" 
+                        placeholder="Agrega un asunto"
+                        formControlName='Titulo'
+                        [ngClass]="{'is-danger': campoNoValido('Titulo')}">
+                </div>
+                <p class="help is-danger" *ngIf="campoNoValido('Titulo')">
+                Este campo es requerido
+                </p>
+            </div>
+        </div>
+        </div>
+        
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="label">Descripción</label>
+            </div>
+            <div class="field-body">
+            <div class="field">
+                <div class="control">
+                    <textarea class="textarea is-danger" 
+                    placeholder="Explica como podemos ayudarte"
+                    formControlName='Descripcion'
+                    [ngClass]="{'is-danger': campoNoValido('Descripcion')}"></textarea>
+                </div>
+                <p class="help is-danger" *ngIf="campoNoValido('Descripcion')">
+                    Este campo es requerido
+                </p>
+            </div>
+        </div>
+        </div>
+        <div class="field is-horizontal">
+            <div class="field-label">
+                <!-- Left empty for spacing -->
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div class="control">
+                        <button class="button is-primary">
+                            Crear tickets
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    </div>
+</div>

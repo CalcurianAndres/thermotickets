@@ -1,0 +1,15 @@
+<div class="card">
+    <div class="card-content">
+        <strong>Generar reporte:</strong>
+        <br><br>
+        <form autocomplete="off"
+        [formGroup]="fechasForm"
+        (ngSubmit)="generarReporte()">
+            De: <input type="date" 
+                    formControlName='desde'>  
+            Hasta: <input type="date"
+                    formControlName='hasta'><br><br>
+            <button class="button is-success">Generar Reporte</button>
+        </form>
+    </div>
+</div>

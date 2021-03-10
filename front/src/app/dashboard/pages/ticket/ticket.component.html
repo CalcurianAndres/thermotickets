@@ -1,0 +1,164 @@
+<div class="level" *ngIf="cargando">
+    <div class="level-item has-text-centered">
+        <div>
+            <p class="heading">Cargando...</p>
+            <p class="title"><i class="fas fa-circle-notch fa-pulse"></i></p>
+            <p class="tittle">Por favor espere.</p>
+        </div>
+    </div>
+  </div>
+  <div class="columns animate__animated animate__fadeIn mt-5" *ngIf="!cargando">
+    <div class="column is-two-thirds">
+          <!-- notiticaciones -->
+          <div class="dropdown"
+          [ngClass]="{'is-active':notificacion}"
+          (click)="MostrarNotificacion()"
+          *ngIf="ticket.notificaciones[0]">
+          <div class="dropdown-trigger">
+            <button class="button" aria-haspopup="true" aria-controls="dropdown-menu2">
+              <span title="Badge top right" class="badge is-danger" > {{ticket.notificaciones[0].notificacion.length}} </span>
+                <span><i class="fas fa-bell" aria-hidden="true"></i></span>
+                <span class="icon is-small">
+                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                </span>
+              </button>
+            </div>
+            <div class="dropdown-menu" id="dropdown-menu2" role="menu">
+              <div class="dropdown-content" *ngFor='let notificacion of ticket.notificaciones'>
+                <div class="dropdown-item" *ngFor='let mensaje of notificacion.notificacion'>
+                  <p>
+                    <strong>{{mensaje.usuario.Nombre}} {{mensaje.usuario.Apellido}} {{mensaje.tipo}}</strong><br>
+                    {{mensaje.mensaje}} <br>
+                    <small>{{mensaje.fecha | date:'dd/MM/yyyy - h:mm a'}}</small>
+                  </p>
+                  <hr class="dropdown-divider">
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- fin notificaciones -->
+          <article class="media">
+              <figure class="media-left">
+                <p class="image is-64x64">
+                      <img [src]='ticket.perfilDueno()' alt="Profile Pic">
+                    </p>
+              </figure> 
+              <div class="media-content">
+                  <div class="content">
+                      <p>
+                          <strong>{{ticket.titulo}}</strong><br>
+                          {{ticket.descripcion}}<br>
+                          <!-- 13/01/2021 - 12:49 -->
+                          <small>{{ticket.fecha | date:'dd/MM/yyyy - h:mm a'}}</small>
+                      </p>
+                  </div>
+                  
+                <div *ngFor="let comentario of ticket.comentarios">
+                  <article class="media" *ngFor='let mensaje of comentario.comentarios'>
+                    <figure class="media-left">
+                      <p class="image is-48x48">
+                        <img src="http://localhost:8080/api/imagen/usuarios/{{mensaje.usuario.img}}" 
+                          alt="Profile Pic" *ngIf="mensaje.usuario.img">
+                          <img src="http://localhost:8080/api/imagen/usuarios/no-image" 
+                          alt="Profile Pic" *ngIf="!mensaje.usuario.img">
+                        </p>
+                    </figure>
+                    <div class="media-content">
+                      <div class="content">
+                        <p>
+                          <strong>{{mensaje.usuario.Nombre}} {{mensaje.usuario.Apellido}}</strong><br>
+                          {{mensaje.mensaje}}<br>
+                          <small>{{mensaje.fecha | date: 'dd/MM/yyyy - h:mm a'}}</small> 
+                        </p>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+          </div>
+        </article><br>
+        <form
+        autocomplete="off"
+        [formGroup]="newComment"
+        (ngSubmit)="comentar()">
+          <article class="media">
+              <figure class="media-left">
+                <p class="image is-64x64">
+                  <img [src]="usuario.mostrarImagen()">
+                </p>
+              </figure>
+              <div class="media-content">
+                  <div class="field">
+                    <p class="control">
+                      <textarea class="textarea" placeholder="Agregar un commentario..." formControlName='mensaje'></textarea>
+                    </p>
+                  </div>
+                  <div class="field">
+                    <p class="control">
+                      <button class="button"
+                      [ngClass]="{'is-loading':enviando}"
+                      >Comentar</button>
+                    </p>
+                  </div>
+                </div>
+              </article>
+            </form>
+          </div>
+      <div class="column" *ngIf="usuario.Role === 'ADMIN_ROLE'">
+        <div class="card control">
+          <div class="card-header">
+            <p class="card-header-title">
+              TICKET
+            </p>
+          </div>
+          <div class="card-content">
+            <strong>Abierto por: </strong>{{ticket.usuario[0].Nombre}} {{ticket.usuario[0].Apellido}} <br>
+            <strong>AnyDesk: </strong> {{ticket.usuario[0].AnyDesk}} <br>
+            <strong>Para: </strong>
+            <div class="select">
+              <select [(ngModel)]="ticket.departamento">
+                <option value="soporte">Sop. Técnico</option>
+                <option value="profit">Profit</option>
+              </select> 
+            </div> 
+            <br>
+            <hr>
+  
+            <strong>Status: </strong>
+            <div class="select">
+              <select [(ngModel)]="ticket.estado">
+                <option value="ABIERTO">Abierto</option>
+                <option value="EJECUTANDOSE">En ejecución</option>
+                <option value="CERRADO">Cerrado</option>
+              </select>
+            </div> 
+            <br>
+            <!-- COMIENZO DEL MODAL -->
+              <div class="modal" [ngClass]="{'is-active':modal}">
+                <div class="modal-background"></div>
+              <div class="modal-card">
+                <header class="modal-card-head">
+                  <p class="modal-card-title">Modificar ticket</p>
+                </header>
+                <section class="modal-card-body has-text-centered">
+                  <p class="title">Deja un comentario para continuar</p>
+                  <textarea class="textarea" placeholder="Agregar un commentario..." 
+                  (change)="verificarText(mensaje)" #mensaje></textarea>
+                </section>
+                <footer class="modal-card-foot">
+                  <button class="button is-primary is-disabled"
+                  [disabled]="!lleno"
+                  (click)="cambiarTicket(ticket, mensaje)">Guardar Cambios</button>
+                  <button class="button" (click)="Modal()">Cancelar</button>
+                </footer>
+              </div>
+              </div>
+            <!-- FINAL DEL MODAL -->
+            <a (click)="Modal()" class="button mt-5 is-fullwidth is-primary">Actualizar Ticket</a>
+          </div>
+        </div>
+        <!-- <article class="message">
+          <div class="message-body">
+          </div>
+        </article> -->
+      </div>
+  </div>

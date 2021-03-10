@@ -1,0 +1,116 @@
+<div class="card">
+    <div class="card-content">
+        <div class="columns">
+            <div class="column is-one-quarter has-text-centered">
+                <!-- imagen actual de perfil -->
+                    <img [src]="usuario.mostrarImagen()" width="256px">
+                <!-- cambiar imagen input -->
+                <div class="file is-info mt-5">
+                    <label class="file-label">
+                      <input class="file-input" type="file" 
+                                name="resume"
+                                (change)="CambiarImagen($event)">
+                      <span class="file-cta">
+                        <span class="file-icon">
+                          <i class="fas fa-upload"></i>
+                        </span>
+                        <span class="file-label">
+                          Imagen
+                        </span>
+                      </span>
+                      <span class="file-name">
+                        Sin archivo...
+                      </span>
+                    </label>
+                </div>
+                <button class="button is-primary mt-5 is-fullwidth"
+                [disabled]="!ImgSubir"
+                [ngClass]="{'is-loading': cargando}"
+                (click)='subirImagen()'>
+                Cambiar imagen
+            </button>
+                <!-- estadisticas de usuario -->
+                <div class="card mt-5">
+                    <div class="card-content">
+                        <div class="columns">
+                            <div class="column is-four-fifths"><b>Abiertos</b></div>
+                            <div class="column">{{datosUsuario.Abiertos}}</div>
+                        </div>
+                        <div class="columns">
+                            <div class="column is-four-fifths"><b>Ejecutandose</b></div>
+                            <div class="column">{{datosUsuario.Ejecutandose}}</div>
+                        </div>
+                        <div class="columns">
+                            <div class="column is-four-fifths"><b>Cerrados</b></div>
+                            <div class="column">{{datosUsuario.Cerrados}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <!-- Información personal -->
+                <h1 class="title is-3">{{usuario.Nombre}} {{usuario.Apellido}}</h1>
+                <h2 class="subtitle is-4">Correo: {{usuario.Correo}}</h2>
+                <h2 class="subtitle is-4">AnyDesk: {{usuario.AnyDesk}}</h2>
+                <!-- table de tickets abiertos -->
+                <div class="card">
+                    <div class="card-header">
+                        <p class="card-header-title">Tickets de {{usuario.Nombre}}</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="level" *ngIf="cargando_">
+                            <div class="level-item has-text-centered">
+                                <div>
+                                    <p class="heading">Cargando.</p>
+                                    <p class="title"><i class="fas fa-circle-notch fa-pulse"></i></p>
+                                    <p class="tittle">Por favor espere...</p>
+                                </div>
+                            </div>
+                           </div>
+                           <!-- si esta vacio -->
+                           <div class="level" *ngIf="!cargando_ && datosUsuario.Total.length === 0">
+                             <div class="level-item has-text-centered">
+                               <img src="../../../../assets/enredo.jpg" width="500px">
+                             </div>
+                           </div>
+                           <div class="level" *ngIf="!cargando_ && datosUsuario.Total.length === 0">
+                            <div class="level-item has-text-centered">
+                              Si algo esta saliendo mal - <br>
+                              <button class="button is-primary is-outlined" routerLink='/dashboard/nuevo'>Genera un nuevo ticket</button>
+                            </div>
+                          </div>
+                           <!-- si ya cargó -->
+                        <table class="table table is-fullwidth" *ngIf="!cargando_ && datosUsuario.Total.length > 0">
+                            <thead>
+                              <tr>
+                                <th>Asunto</th>
+                                <th>Status</th>
+                                <th>Fecha</th>
+                                <th>Ver</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor='let ticket of datosUsuario.Total'>
+                                <td>{{ticket.titulo}}</td>
+                                <td>
+                                  <span class="tag is-success is-light" *ngIf="ticket.estado == 'ABIERTO'">{{ticket.estado}}</span>
+                                  <span class="tag is-warning is-light" *ngIf="ticket.estado == 'EJECUTANDOSE'">{{ticket.estado}}</span>
+                                  <span class="tag is-danger is-light" *ngIf="ticket.estado == 'CERRADO'">{{ticket.estado}}</span>
+                                </td>
+                                <td>{{ticket.fecha | date:'dd/MM/yyyy'}}</td> 
+                                <td><button class="button is-primary" routerLink='/dashboard/ticket/{{ticket._id}}'>Ver</button></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        <!-- paginacion -->
+                        <nav class="pagination is-centered" role="navigation" aria-label="pagination" *ngIf="!cargando_ && datosUsuario.Total.length > 0">
+                            <a class="pagination-previous" (click)="previous()">Anterior</a>
+                            <a class="pagination-next" (click)="next()">Siguiente</a>
+                        </nav>
+                        <!-- fin paginacion -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

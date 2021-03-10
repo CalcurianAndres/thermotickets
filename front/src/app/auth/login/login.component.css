@@ -1,0 +1,43 @@
+.verde{
+    background-color: #8cc3e2;
+    position: absolute;
+    width: 70%;
+    height: 100%;
+}
+.login{
+    position: absolute;
+    width: 30%;
+    right: 0px;
+    top: 1%;
+}
+
+/* svg */
+.custom-shape-divider-bottom-1613483104 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1613483104 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 130px;
+    transform: rotateY(180deg);
+}
+
+.custom-shape-divider-bottom-1613483104 .shape-fill {
+    fill: #FFFFFF;
+}
+@media screen and (max-width: 700px){
+    .verde{
+        display: none;
+    }
+    .login{
+        width: 100%;
+    }
+}

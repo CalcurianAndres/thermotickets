@@ -1,0 +1,61 @@
+<app-reporte
+(onNewReporte)="generarReporte( $event )">
+</app-reporte>
+<img src="" alt="">
+<div class="card mt-3" id='reporteGenerado' *ngIf="seRealizoReporte">
+    <div class="card-content">
+        <b>
+        </b>
+        <p class="titulo">
+            REPORTE DEL DEPARTAMENTO DE SISTEMAS <br> 
+            tickets gestionados del {{desde}} al {{hasta}}
+        </p>
+        <br>
+        <div class="level" *ngIf="cargando">
+            <div class="level-item has-text-centered">
+                <div>
+                    <p class="heading">Cargando.</p>
+                    <p class="title"><i class="fas fa-circle-notch fa-pulse"></i></p>
+                    <p class="tittle">Por favor espere...</p>
+                </div>
+            </div>
+        </div>
+        <div class="level" *ngIf="!cargando && reporte.length === 0">
+            <div class="level-item has-text-centered">
+                <div>
+                    no hay tickets en la fecha solicitada
+                </div>
+            </div>
+        </div>
+        <table class="table mt-3 is-narrow is-fullwidth table is-striped animate__animated animate__fadeIn" *ngIf="!cargando && reporte.length > 0">
+            <thead>
+                <tr>
+                    <th>N°</th>
+                    <th>Fecha</th>
+                    <th>Nombre de Usuario</th>
+                    <th>Asunto</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor='let ticket of reporte; let i = index'>
+                    <td>{{i + 1}}</td>
+                    <td>{{ticket.fecha | date:'dd/MM/yyyy'}}</td>
+                    <td>{{ticket.usuario[0].Nombre}} {{ticket.usuario[0].Apellido}}</td>
+                    <td>{{ticket.titulo}}</td>
+                    <td>{{ticket.estado}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="card mt-3" *ngIf="!cargando && reporte.length > 0">
+    <div class="card-content">
+        <button class="button is-primary" (click)="openPDF()">
+            <span>Descargar PDF</span>
+            <span class="icon is-small">
+              <i class="fas fa-file-download"></i>
+            </span>
+          </button>
+    </div>
+</div>

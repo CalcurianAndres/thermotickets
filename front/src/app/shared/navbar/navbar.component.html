@@ -1,0 +1,45 @@
+<nav class="navbar is-primary">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="#">
+        <img src="../../../assets/logo.png" alt="logo" width="112" height="28">
+      </a>
+      <div class="navbar-burger" data-target="navbarExampleTransparentExample">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+    <div class="navbar-brand">
+     <div class="navbar-item">
+       <a routerLink="/dashboard" routerLinkActive='is-active' class='is-active'>Dashboard</a>
+     </div>
+     <div class="navbar-item">
+      <a routerLink="/monitoreo" routerLinkActive='is-active'>Monitoreo</a>
+    </div>
+    </div>
+  
+    <div id="navbarExampleTransparentExample" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            <figure class="image is-32x32">
+                <img class="is-rounded" [src]="usuario.mostrarImagen()">
+              </figure>
+             {{usuario.Nombre}} {{usuario.Apellido}}
+          </a>
+          <div class="navbar-dropdown is-boxed">
+            <a class="navbar-item" routerLink='perfil'>
+              Perfil
+            </a>
+            <a class="navbar-item" routerLink='configuracion'>
+              Configuración
+            </a>
+            <hr class="navbar-divider">
+            <a class="navbar-item" routerLink='/login'>
+              Cerrar sesion
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>

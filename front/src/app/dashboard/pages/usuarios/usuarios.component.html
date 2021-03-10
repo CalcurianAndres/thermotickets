@@ -1,0 +1,154 @@
+<div class="card animate__animated animate__fadeIn mt-5">
+    <div class="card-content">
+        <p class="title">Usuarios ({{total}})</p>
+        <div class="level" *ngIf="cargando">
+            <div class="level-item has-text-centered">
+                <div>
+                    <p class="heading">Cargando...</p>
+                    <p class="title"><i class="fas fa-circle-notch fa-pulse"></i></p>
+                    <p class="tittle">Por favor espere.</p>
+                </div>
+            </div>
+        </div>  
+        <table class=" table is-narrow is-fullwidth table is-striped animate__animated animate__fadeIn" *ngIf="!cargando">
+            <thead>
+                <tr>
+                    <th>Avatar</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Correo</th>
+                    <th>AnyDesk</th>
+                    <th>Role</th>
+                    <th>Departamento</th>
+                    <th>Sede</th>
+                    <th>Accion</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let usuario of usuarios">
+                    <td>
+                        <figure class="image is-32x32">
+                            <img class="is-rounded" [src]='usuario.mostrarImagen()'>
+                        </figure>
+                    </td>
+                    <td>{{usuario.Nombre}}</td>
+                    <td>{{usuario.Apellido}}</td>
+                    <td>{{usuario.Correo}}</td>
+                    <td>{{usuario.AnyDesk}}</td>
+                    <td>
+                        <select [(ngModel)]="usuario.Role"
+                        (change)="cambiarRole(usuario)">
+                            <option value='ADMIN_ROLE'>Admin</option>
+                            <option value='USER_ROLE'>Usuario</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select [(ngModel)]="usuario.Departamento"
+                        (change)="cambiarRole(usuario)">
+                        <option value="soporte">Soporte</option>
+                        <option value="profit">Profit</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select [(ngModel)]="usuario.Sede"
+                        (change)="cambiarRole(usuario)">
+                        <option value="Orion">Orion</option>
+                        <option value="CDT">CDT</option>
+                        <option value="Mystic Brands">Mystic Brands</option>
+                        </select>
+                    </td>
+                    <td>
+                        <!-- <div class="icon-text">                             
+                            <a (click)='editarUsuario(usuario._id)'>
+                                <span class="icon has-text-danger">
+                                    <i class="fas fa-user-edit"></i>
+                                </span>
+                            </a>
+                        </div>   -->
+                        <div class="icon-text">                             
+                            <a (click)='borrarUsuario(usuario._id)'>
+                                <span class="icon has-text-danger">
+                                    <i class="fas fa-user-minus"></i>
+                                </span>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <nav class="pagination is-small" role="navigation" aria-label="pagination" *ngIf="!cargando">
+            <a class="pagination-previous" (click)="previous()">Anterior</a>
+            <a class="pagination-next" (click)="next()">Siguiente</a>
+        </nav>
+    </div>
+</div>
+
+<div class="modal"
+    [ngClass]="{'is-active': is_active}"> 
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <!-- INICIO DEL FORM PARA MODIFICAR -->
+        <form>
+
+            <header class="modal-card-head">
+                <p class="modal-card-title">Modificar usuario</p>
+                <button class="delete" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
+                <div class="level" *ngIf="cargando_">
+                    <div class="level-item has-text-centered">
+                        <div>
+                            <p class="heading">Cargando.</p>
+                            <p class="title"><i class="fas fa-circle-notch fa-pulse"></i></p>
+                            <p class="tittle">Por favor espere...</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Nombre</label>
+                    <div class="control has-icons-left has-icons-right">
+                        <input class="input" type="text">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-user fa-xs"></i>
+                        </span>
+                    </div>
+                    <label class="label">Apellido</label>
+            <div class="control has-icons-left has-icons-right">
+                <input class="input" type="text">
+                <span class="icon is-small is-left">
+                    <i class="fas fa-user fa-xs"></i>
+                </span>
+            </div>
+            <label class="label">Correo</label>
+            <div class="control has-icons-left has-icons-right">
+                <input class="input" type="text">
+                <span class="icon is-small is-left">
+                    <i class="fas fa-envelope fa-xs"></i>
+                </span>
+            </div>
+            <label class="label">AnyDesk</label>
+            <div class="control has-icons-left has-icons-right">
+                <input class="input" type="text">
+                <span class="icon is-small is-left">
+                    <i class="fas fa-user fa-xs"></i>
+                </span>
+            </div>
+            <br>
+            <div class="field">
+                <input class="is-checkradio has-background-color is-success" 
+                id="exampleCheckboxBackgroundColorSuccess" 
+                type="checkbox" 
+                name="exampleCheckboxBackgroundColorSuccess" 
+                checked="checked"
+                formControlName='remember'>
+                <label for="exampleCheckboxBackgroundColorSuccess">Resetear contraseña (colocandole por defecto '123456').</label>
+            </div>
+        </div>
+    </section>
+    <footer class="modal-card-foot">
+        <button class="button is-success">Guardar cambios</button>
+        <button class="button">Cancelar</button>
+    </footer>
+</form>
+</div>
+  </div>

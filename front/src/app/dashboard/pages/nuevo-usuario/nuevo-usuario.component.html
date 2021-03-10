@@ -1,0 +1,113 @@
+<div class="columns">
+    <div class="column">
+        <div class="card animate__animated animate__fadeIn mt-5">
+            <div class="card-content">
+              <form
+              autocomplete="off"
+              [formGroup]="newUserForm"
+              (ngSubmit)="crearUsuario()">
+                <p class="title">Información Personal</p>
+                <div class="columns">
+                    <div class="column">
+                        <div class="field">
+                            <p class="control has-icons-left has-icons-right">
+                              <input class="input" type="text" placeholder="Nombre" formControlName='Nombre'>
+                              <span class="icon is-small is-left">
+                                <i class="fas fa-user-alt"></i>
+                              </span>
+                            </p>
+                          </div>
+                        </div>
+                        <div class="column">
+                        <div class="field">
+                          <p class="control has-icons-left">
+                              <input class="input" type="text" placeholder="Apellido" formControlName='Apellido'>
+                              <span class="icon is-small is-left">
+                                <i class="fas fa-user-alt"></i>
+                              </span>
+                            </p>
+                        </div>
+                      </div>
+                </div>
+                <div class="field">
+                    <p class="control has-icons-left has-icons-right">
+                      <input class="input" type="email" placeholder="Email" formControlName='Correo'>
+                      <span class="icon is-small is-left">
+                        <i class="fas fa-envelope"></i>
+                      </span>
+                      <span class="icon is-small is-right">
+                        <i class="fas fa-check"></i>
+                      </span>
+                    </p>
+                </div>
+
+                <div class="field">
+                  <p class="control has-icons-left has-icons-right">
+                      <input class="input" type="text" placeholder="Número de AnyDesk" formControlName='AnyDesk'>
+                      <span class="icon is-small is-left">
+                        <i class="fas fa-headset"></i>
+                      </span>
+                    </p>
+                  </div>
+                  
+                  <div class="columns">
+                    <div class="column">
+                        <div class="field">
+                          <p class="control has-icons-left has-icons-right">
+                              <input class="input" type="password" placeholder="Contraseña" formControlName='Password'>
+                              <span class="icon is-small is-left">
+                                <i class="fas fa-lock"></i>
+                              </span>
+                            </p>
+                          </div>
+                        </div>
+                    <div class="column">
+                      <div class="field">
+                            <p class="control has-icons-left has-icons-right">
+                              <input class="input" type="password" placeholder="Repetir Contraseña" formControlName='password2'>
+                              <span class="icon is-small is-left">
+                                <i class="fas fa-lock"></i>
+                              </span>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <hr>
+                      <button class="button is-fullwidth is-primary"
+                                    [ngClass]="{'is-loading':cargando}">
+                                    Crear usuario</button>
+                      <article class="message is-danger mt-5" *ngIf="campoNoValido('Nombre')">
+                        <div class="message-body">
+                          El nombre es obligatorio
+                        </div>
+                      </article>
+                      <article class="message is-danger mt-5" *ngIf="campoNoValido('Apellido')">
+                        <div class="message-body">
+                          El apellido es obligatorio
+                        </div>
+                      </article>
+                      <article class="message is-danger mt-5" *ngIf="campoNoValido('Email')">
+                        <div class="message-body">
+                          El email es obligatorio y debe ser valido
+                        </div>
+                      </article>
+                      <article class="message is-danger mt-5" *ngIf="campoNoValido('AnyDesk')">
+                        <div class="message-body">
+                          El numero de AnyDesk es obligatorio
+                        </div>
+                      </article>
+                      <article class="message is-danger mt-5" *ngIf="contrasenaNoValidas()">
+                        <div class="message-body">
+                          Las contraseñas deben ser iguales
+                        </div>
+                      </article>
+                    </form>
+            </div>    
+        </div>
+      </div>
+    <div class="column centrado">
+        <figure class="image is-square">
+            <img src="../../../../assets/newUser.jpg">
+        </figure>
+      </div>
+</div>

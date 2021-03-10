@@ -1,0 +1,23 @@
+<div class="etiqueta box morado2">
+    <img src="../../../../assets/dashboard.svg" alt="Dashboard" width="80px">
+    DASHBOARD
+</div>
+<div class="columns">
+    <div class="column" *ngFor='let item of sidebarService.menu'>
+        <div class="etiqueta box {{item.color}}">
+            <p class="titulo">
+                {{item.titulo}}
+            </p>
+            <div class="columns">
+                <div class="column is-one-fifth">
+                    <i [class]="item.icono"></i>
+                </div>
+                <div class="column">
+                    <li *ngFor='let subMenuItem of item.submenu'>
+                        <a routerLinkActive='is-active' [routerLink]="subMenuItem.url"><i [class]="subMenuItem.icono"></i> {{subMenuItem.titulo}}</a>
+                    </li>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
